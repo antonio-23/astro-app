@@ -1,0 +1,14 @@
+---
+type Props = {
+   category: string,
+}
+
+const {category} = Astro.props;
+---
+
+<a
+   href={`/category/${category}`} 
+   class="text-teal-900 rounded-3xl uppercase text-lg py-2 px-4 border-2 border-teal-900 whitespace-nowrap hover:scale-105 transition duration-300 ease-in-out"
+   >
+   {category}
+</a>
