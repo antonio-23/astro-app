@@ -1,5 +1,6 @@
 ---
 import { Image } from 'astro:assets';
+import { getEntryBySlug } from 'astro:content';
 import {type CollectionEntry} from 'astro:content'
 
 type Props = {
@@ -7,6 +8,7 @@ type Props = {
 }
 
 const {post} = Astro.props;
+const author = await getEntryBySlug('authors', post.data.author);
 ---
 
 <article>
@@ -24,8 +26,17 @@ const {post} = Astro.props;
     class="text-4xl text-zinc-900 font-semibold inline-block"
     >
     <h2>{post.data.title}</h2>
+    </a>
     
     <p class="text-zinc-500 text-xl mb-9 line-clamp-2">{post.body}</p>
-    </a>
+
+    <div class="flex justify-between items-center">
+        {author ? (
+            <a href={`/author/${author.slug}`} class="text-zinc-900 text-2xl font-medium">
+                {author.data.name}
+            </a>
+        ) : null}
+        <span class="text-zinc-700 text-xl">{post.data.date}</span>
+    </div>
 </article>
 
